@@ -42,10 +42,10 @@ violence_dist = ConditionalProbabilityTable([
     [0, 0, 0, 1-.6],
     [0, 1, 1, .4],
     [0, 1, 0, 1-.4],
-    [1, 0, 1, .85],
-    [1, 0, 0, 1-.85],
-    [1, 1, 1, .5],
-    [1, 1, 0, 1-.5]],
+    [1, 0, 1, .5],
+    [1, 0, 0, 1-.5],
+    [1, 1, 1, .3],
+    [1, 1, 0, 1-.3]],
     [shg_dist, flexible_dist])
 
 land_dist = ConditionalProbabilityTable([
@@ -102,22 +102,20 @@ model.bake()
 # joint distribution
 # print out probability of each given outcome
 # set none if doesn't matter
-seed_val = None
-shg_val = 1
-phase_val = 1
-flexible_val = 1
-land_val = 1
-knowledge_val = 1
-violence_val = 1
-prob = model.probability([[seed_val,
-                    shg_val,
-                    phase_val,
-                    flexible_val,
-                    land_val,
-                    knowledge_val,
-                    violence_val]])
+cause = 0
+effect = 1
+seed_val = cause
+shg_val = cause
+phase_val = cause
+flexible_val = cause
+land_val = None
+knowledge_val = None
+violence_val = None
+prob = model.probability([[seed_val, shg_val, phase_val, flexible_val, land_val, knowledge_val, violence_val]])
 print(prob)
+
 pdb.set_trace()
+model.predict_proba([[seed_val, shg_val, phase_val, flexible_val, land_val, knowledge_val, violence_val]])
 
 # show module
 model.plot()
